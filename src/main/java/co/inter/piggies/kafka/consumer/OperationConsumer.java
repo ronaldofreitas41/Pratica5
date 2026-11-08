@@ -25,7 +25,7 @@ import java.util.UUID;
  * tópico desde o início. Com LATEST, leria só as mensagens novas.       *
  *-----------------------------------------------------------------------*
  */
-@KafkaListener(groupId = "operation.piggies", offsetReset = OffsetReset.EARLIEST)
+@KafkaListener(groupId = "piggy-balance", offsetReset = OffsetReset.EARLIEST)
 public class OperationConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(OperationConsumer.class);

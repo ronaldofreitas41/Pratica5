@@ -172,13 +172,12 @@ public class PigService {
         operation.setType(body.type());
         operation.setStatus("ACCEPTED");
 
-        Operation savedOperation = operationRepository.save(operation);
 
         OperationEventDTO event = new OperationEventDTO(
                 operation.getId(),
                 pig.getId(),
-                savedOperation.getType(),
-                savedOperation.getAmount()
+                operation.getType(),
+                operation.getAmount()
         );
 
         operationProducer.send(pig.getOwnerId(),event);
