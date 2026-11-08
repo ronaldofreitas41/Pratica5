@@ -2,10 +2,12 @@ package co.inter.piggies.kafka.consumer;
 
 import co.inter.piggies.kafka.Topics;
 import co.inter.piggies.kafka.events.OperationEventDTO;
+import co.inter.piggies.service.OperationService;
 import io.micronaut.configuration.kafka.annotation.KafkaKey;
 import io.micronaut.configuration.kafka.annotation.KafkaListener;
 import io.micronaut.configuration.kafka.annotation.OffsetReset;
 import io.micronaut.configuration.kafka.annotation.Topic;
+import jakarta.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +31,9 @@ import java.util.UUID;
 public class OperationConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(OperationConsumer.class);
+
+    @Inject
+    private OperationService operationService;
 
     /*
      *---------------------------------------------------------------------*
@@ -54,6 +59,6 @@ public class OperationConsumer {
         LOG.info("Mensagem recebida do tópico {} | id: {}", Topics.OPERATIONS, id);
 
         // Coloque aqui o processamento da mensagem
-
+        operationService.processBalance(event);
     }
 }
